@@ -26,26 +26,37 @@
     <button onclick="launchWindows()">I love cute puppies</button>
     <script>
         function launchWindows() {
-            // First wave - open 3 windows (most browsers allow 2-3 popups)
-            for(let i = 0; i < 3; i++) {
+            // Get screen dimensions
+            const screenWidth = window.screen.width;
+            const screenHeight = window.screen.height;
+
+            // First wave - open 3 windows in different screen areas
+            const positions = [
+                {x: 0, y: 0}, // top left
+                {x: screenWidth/2, y: screenHeight/2}, // center
+                {x: screenWidth-800, y: 0} // top right
+            ];
+
+            positions.forEach((pos, i) => {
                 window.open('main.html', '_blank', 
-                    'width=800,height=600,resizable=yes,menubar=no,toolbar=no,location=no,status=no');
-            }
+                    `width=800,height=600,left=${pos.x},top=${pos.y},resizable=yes,menubar=no,toolbar=no,location=no,status=no`);
+            });
 
             // After user sees first popups, show message to enable popups
             setTimeout(() => {
-                // Create temporary button for second wave
                 const btn = document.createElement('button');
                 btn.innerHTML = 'Click to continue';
                 btn.onclick = () => {
-                    // Second wave - open remaining windows
+                    // Second wave - open remaining windows at random positions
                     for(let i = 0; i < 17; i++) {
                         setTimeout(() => {
+                            const randomX = Math.floor(Math.random() * (screenWidth - 800));
+                            const randomY = Math.floor(Math.random() * (screenHeight - 600));
                             window.open('main.html', '_blank', 
-                                'width=800,height=600,resizable=yes,menubar=no,toolbar=no,location=no,status=no');
+                                `width=800,height=600,left=${randomX},top=${randomY},resizable=yes,menubar=no,toolbar=no,location=no,status=no`);
                         }, i * 100);
                     }
-                    btn.remove(); // Remove the temporary button
+                    btn.remove();
                 };
                 document.body.appendChild(btn);
             }, 1000);
