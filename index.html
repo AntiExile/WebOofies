@@ -2,18 +2,38 @@
 <html>
 <head>
     <title>Launch Page</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #f5f5f5;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            background: #007bff;
+            color: white;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
+    <button onclick="launchWindows()">Click to Start</button>
     <script>
-        window.onload = function() {
-            // Open exactly 20 popups
+        function launchWindows() {
+            // Open windows one by one with slight delay
             for(let i = 0; i < 20; i++) {
-                window.open('main.html', '_blank', 'width=800,height=600,resizable=yes,menubar=no,toolbar=no,location=no,status=no');
+                setTimeout(() => {
+                    window.open('main.html', '_blank', 
+                        'width=800,height=600,resizable=yes,menubar=no,toolbar=no,location=no,status=no');
+                }, i * 100);
             }
-            // Close the launcher page
-            window.close();
         }
     </script>
-    <p>Click anywhere to continue...</p>
 </body>
 </html>
