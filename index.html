@@ -20,10 +20,19 @@
             color: white;
             border-radius: 5px;
         }
+        .version-counter {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            font-size: 12px;
+            color: #666;
+            font-family: monospace;
+        }
     </style>
 </head>
 <body>
     <button onclick="launchWindows()">I love cute puppies</button>
+    <div class="version-counter">v1.0.0</div>
     <script>
         function launchWindows() {
             // Get screen dimensions
