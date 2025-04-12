@@ -32,43 +32,37 @@
 </head>
 <body>
     <button onclick="launchWindows()">I love cute puppies</button>
-    <div class="version-counter">v1.0.0</div>
+    <div class="version-counter">v1.0.1</div>
     <script>
         function launchWindows() {
-            // Get screen dimensions
             const screenWidth = window.screen.width;
             const screenHeight = window.screen.height;
+            let windowsOpened = 0;
+            const totalWindows = 20;
+            const batchSize = 3; // Open 3 windows per batch
 
-            // First wave - open 3 windows in different screen areas
-            const positions = [
-                {x: 0, y: 0}, // top left
-                {x: screenWidth/2, y: screenHeight/2}, // center
-                {x: screenWidth-800, y: 0} // top right
-            ];
+            function createWindowBatch() {
+                for(let i = 0; i < batchSize && windowsOpened < totalWindows; i++) {
+                    const randomX = Math.floor(Math.random() * (screenWidth - 800));
+                    const randomY = Math.floor(Math.random() * (screenHeight - 600));
+                    window.open('main.html', '_blank', 
+                        `width=800,height=600,left=${randomX},top=${randomY},resizable=yes,menubar=no,toolbar=no,location=no,status=no`);
+                    windowsOpened++;
+                }
 
-            positions.forEach((pos, i) => {
-                window.open('main.html', '_blank', 
-                    `width=800,height=600,left=${pos.x},top=${pos.y},resizable=yes,menubar=no,toolbar=no,location=no,status=no`);
-            });
+                if (windowsOpened < totalWindows) {
+                    const btn = document.createElement('button');
+                    btn.innerHTML = `Click to continue (${windowsOpened}/${totalWindows})`;
+                    btn.style = 'margin: 10px;';
+                    btn.onclick = () => {
+                        btn.remove();
+                        createWindowBatch();
+                    };
+                    document.body.appendChild(btn);
+                }
+            }
 
-            // After user sees first popups, show message to enable popups
-            setTimeout(() => {
-                const btn = document.createElement('button');
-                btn.innerHTML = 'Click to continue';
-                btn.onclick = () => {
-                    // Second wave - open remaining windows at random positions
-                    for(let i = 0; i < 17; i++) {
-                        setTimeout(() => {
-                            const randomX = Math.floor(Math.random() * (screenWidth - 800));
-                            const randomY = Math.floor(Math.random() * (screenHeight - 600));
-                            window.open('main.html', '_blank', 
-                                `width=800,height=600,left=${randomX},top=${randomY},resizable=yes,menubar=no,toolbar=no,location=no,status=no`);
-                        }, i * 100);
-                    }
-                    btn.remove();
-                };
-                document.body.appendChild(btn);
-            }, 1000);
+            createWindowBatch();
         }
     </script>
 </body>
