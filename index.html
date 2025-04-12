@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Launch Page</title>
+</head>
+<body>
+    <script>
+        window.onload = function() {
+            // Open exactly 20 popups
+            for(let i = 0; i < 20; i++) {
+                window.open('main.html', '_blank', 'width=800,height=600,resizable=yes,menubar=no,toolbar=no,location=no,status=no');
+            }
+            // Close the launcher page
+            window.close();
+        }
+    </script>
+    <p>Click anywhere to continue...</p>
+</body>
+</html>

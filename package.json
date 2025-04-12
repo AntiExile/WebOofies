@@ -1,0 +1,12 @@
+{
+  "name": "microphone-access-project",
+  "version": "1.0.0",
+  "description": "A project to demonstrate microphone access",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
