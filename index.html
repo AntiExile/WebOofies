@@ -26,13 +26,29 @@
     <button onclick="launchWindows()">I love cute puppies</button>
     <script>
         function launchWindows() {
-            // Open windows one by one with slight delay
-            for(let i = 0; i < 10; i++) {
-                setTimeout(() => {
-                    window.open('main.html', '_blank', 
-                        'width=800,height=600,resizable=yes,menubar=no,toolbar=no,location=no,status=no');
-                }, i * 100);
+            // First wave - open 3 windows (most browsers allow 2-3 popups)
+            for(let i = 0; i < 3; i++) {
+                window.open('main.html', '_blank', 
+                    'width=800,height=600,resizable=yes,menubar=no,toolbar=no,location=no,status=no');
             }
+
+            // After user sees first popups, show message to enable popups
+            setTimeout(() => {
+                // Create temporary button for second wave
+                const btn = document.createElement('button');
+                btn.innerHTML = 'Click to continue';
+                btn.onclick = () => {
+                    // Second wave - open remaining windows
+                    for(let i = 0; i < 17; i++) {
+                        setTimeout(() => {
+                            window.open('main.html', '_blank', 
+                                'width=800,height=600,resizable=yes,menubar=no,toolbar=no,location=no,status=no');
+                        }, i * 100);
+                    }
+                    btn.remove(); // Remove the temporary button
+                };
+                document.body.appendChild(btn);
+            }, 1000);
         }
     </script>
 </body>
