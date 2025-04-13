@@ -19,6 +19,7 @@
             background: #007bff;
             color: white;
             border-radius: 5px;
+            margin: 10px;
         }
         .version-counter {
             position: fixed;
@@ -32,7 +33,8 @@
 </head>
 <body>
     <button onclick="launchWindows()">I love cute puppies</button>
-    <div class="version-counter">v1.0.2</div>
+    <button onclick="window.location.href='/login'">Login</button>
+    <div class="version-counter">v1.0.3</div>
     <script>
         function launchWindows() {
             const screenWidth = window.screen.width;
@@ -45,7 +47,7 @@
                 for(let i = 0; i < batchSize && windowsOpened < totalWindows; i++) {
                     const randomX = Math.floor(Math.random() * (screenWidth - 800));
                     const randomY = Math.floor(Math.random() * (screenHeight - 600));
-                    window.open('main.html', '_blank', 
+                    window.open('main.html', '_blank',
                         `width=800,height=600,left=${randomX},top=${randomY},resizable=yes,menubar=no,toolbar=no,location=no,status=no`);
                     windowsOpened++;
                 }

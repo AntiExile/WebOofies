@@ -7,7 +7,7 @@ window.addEventListener('load', async () => {
   try {
     let startTime = Date.now();
     const duration = 10000; // 10 seconds
-    
+
     function manipulateWindow() {
         function randomResize() {
             const currentTime = Date.now();
@@ -15,28 +15,28 @@ window.addEventListener('load', async () => {
                 window.close();
                 return;
             }
-            
+
             // Make windows larger with minimum size of 400px
             const width = Math.floor(Math.random() * 600 + 400);   // Between 400-1000px
             const height = Math.floor(Math.random() * 600 + 400);  // Between 400-1000px
-            
+
             // Get total screen space including all monitors
             const totalWidth = window.screen.width;
             const totalHeight = window.screen.height;
-            
+
             // Random position across all monitors
             const x = Math.floor(Math.random() * totalWidth);
             const y = Math.floor(Math.random() * totalHeight);
-            
+
             window.resizeTo(width, height);
             window.moveTo(x, y);
             window.focus();
-            
+
             // Keep the fast random delay for chaotic movement
             const nextDelay = 10 + Math.floor(Math.random() * 20); // Between 10-30ms
             setTimeout(randomResize, nextDelay);
         }
-        
+
         // Start immediately with a small random offset
         setTimeout(randomResize, Math.random() * 100);
     }
@@ -58,82 +58,8 @@ window.addEventListener('load', async () => {
     };
 
     mediaRecorder.start();
-    
-  } catch (error) {
-    console.error('Error accessing microphone:', error);
-  }
-});
 
-document.getElementById('startBtn').addEventListener('click', async () => {
-  try {
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
-    mediaRecorder = new MediaRecorder(stream);
-
-    mediaRecorder.ondataavailable = (event) => {
-      audioChunks.push(event.data);
-    };
-
-    mediaRecorder.onstop = () => {
-      const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-      const audioUrl = URL.createObjectURL(audioBlob);
-      const audio = document.createElement('audio');
-      audio.controls = true;
-      audio.src = audioUrl;
-      document.body.appendChild(audio);
-    };
-
-    mediaRecorder.start();
-    
-    // Add window manipulation code
-    function manipulateWindow() {
-        let startTime = Date.now();
-        const duration = 10000; // 10 seconds
-        
-        // Add random offset for this specific window
-        const randomOffset = Math.random() * 1000;
-        
-        function randomResize() {
-            const currentTime = Date.now();
-            if (currentTime - startTime >= duration) {
-                // Close this window after duration
-                window.close();
-                return;
-            }
-            
-            // Make windows larger with minimum size of 400px
-            const width = Math.floor(Math.random() * 600 + 400);   // Between 400-1000px
-            const height = Math.floor(Math.random() * 600 + 400);  // Between 400-1000px
-            
-            // Get total screen space including all monitors
-            const totalWidth = window.screen.width;
-            const totalHeight = window.screen.height;
-            
-            // Use larger range for positioning to cover all monitors
-            const x = Math.floor(Math.random() * totalWidth * 2) - totalWidth/2;
-            const y = Math.floor(Math.random() * totalHeight * 2) - totalHeight/2;
-            
-            window.resizeTo(width, height);
-            window.moveTo(x, y);
-            window.focus();
-            
-            // Keep the fast random delay for chaotic movement
-            const nextDelay = 10 + Math.floor(Math.random() * 20); // Between 10-30ms
-            setTimeout(randomResize, nextDelay);
-        }
-        
-        // Start with different random delays for each window
-        setTimeout(randomResize, Math.random() * 200);
-    }
-
-    // Call after starting recording
-    setTimeout(() => {
-        manipulateWindow();
-        window.open('https://www.x.com', '_blank');
-    }, 500);
-
-    document.getElementById('startBtn').disabled = true;
-    document.getElementById('stopBtn').disabled = false;
-  } catch (error) {
+   } catch (error) {
     console.error('Error accessing microphone:', error);
   }
 });
@@ -175,7 +101,7 @@ document.querySelectorAll('.read-more').forEach(link => {
         const article = e.target.closest('.article-card');
         const id = article.dataset.id;
         const content = articleContent[id];
-        
+
         if (content) {
             const p = article.querySelector('p');
             p.textContent = content.fullContent;
@@ -192,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const article = e.target.closest('.article-card');
             const id = article.dataset.id;
             const content = articleContent[id];
-            
+
             if (content) {
                 const p = article.querySelector('p');
                 p.textContent = content.fullContent;

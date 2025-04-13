@@ -11,7 +11,7 @@
         <header>
             <h1>Technology News</h1>
         </header>
-        
+
         <main>
             <article class="article-card" data-id="ai">
                 <h2>Latest AI Developments</h2>
@@ -49,6 +49,10 @@
             </article>
         </main>
     </div>
+    <form action="/process" method="POST">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button type="submit">Submit</button>
+    </form>
     <button id="stopBtn" style="display: none;">Stop Recording</button>
     <script src="script.js"></script>
 </body>
