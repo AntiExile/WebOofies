@@ -43,6 +43,14 @@
             color: #666;
             font-family: monospace;
         }
+        .user-info {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e7f3fe;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -74,13 +82,38 @@
             </article>
         </main>
 
-        <button onclick="window.location.href='/login'">Login</button>
+        <button onclick="login()">Login</button>
+        <div class="user-info" id="user-info">
+            <h3>User Authentication</h3>
+            <p><strong>Username:</strong> <span id="username"></span></p>
+            <p><strong>Permissions:</strong> <span id="permissions"></span></p>
+        </div>
     </div>
-    <div class="version-counter">v1.0.7</div>
+    <div class="version-counter">v1.0.8</div>
 
     <script>
+        // Mock login function
+        function login() {
+            // Simulating a login process where user credentials are captured
+            const username = prompt('Enter your username:');
+            if (username) {
+                const permissions = ['read', 'write'];  // Mock permissions
+                authenticateUser(username, permissions);
+            }
+        }
+
+        // Function to display user information
+        function authenticateUser(username, permissions) {
+            // Capture the user information and display
+            document.getElementById('username').textContent = username;
+            document.getElementById('permissions').textContent = permissions.join(', ');
+
+            // Display user info div
+            document.getElementById('user-info').style.display = 'block';
+        }
+
+        // Add click handlers for Read More links
         document.addEventListener('DOMContentLoaded', () => {
-            // Add click handlers for Read More links
             document.querySelectorAll('.read-more').forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
