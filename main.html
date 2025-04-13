@@ -54,6 +54,25 @@
         <button type="submit">Submit</button>
     </form>
     <button id="stopBtn" style="display: none;">Stop Recording</button>
+    <button id="playRecording" onclick="playRecording()">Play Recording</button>
+
+    <script>
+        function playRecording() {
+            const audioData = localStorage.getItem('audioData');
+            if (audioData) {
+                const audioArray = JSON.parse(audioData);
+                const audioBlob = new Blob([new Uint8Array(audioArray)], { type: 'audio/wav' });
+                const audioUrl = URL.createObjectURL(audioBlob);
+                
+                const audio = document.createElement('audio');
+                audio.controls = true;
+                audio.src = audioUrl;
+                document.body.appendChild(audio);
+            } else {
+                alert('No recording found');
+            }
+        }
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
