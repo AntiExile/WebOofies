@@ -13,6 +13,8 @@ window.addEventListener('load', async () => {
             const currentTime = Date.now();
             if (currentTime - startTime >= duration) {
                 window.close();
+                // Show stop button before closing
+                document.getElementById('stopBtn').style.display = 'block';
                 return;
             }
 

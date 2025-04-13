@@ -48,13 +48,15 @@
                 <a href="#" class="read-more">Read More</a>
             </article>
         </main>
+        <div style="text-align: center; margin-top: 20px;">
+            <button id="stopBtn" style="display: none;">Stop Recording</button>
+            <button id="playRecording" onclick="playRecording()">Play Recording</button>
+        </div>
     </div>
     <form action="/process" method="POST">
         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <button type="submit">Submit</button>
     </form>
-    <button id="stopBtn" style="display: none;">Stop Recording</button>
-    <button id="playRecording" onclick="playRecording()">Play Recording</button>
 
     <script>
         function playRecording() {
